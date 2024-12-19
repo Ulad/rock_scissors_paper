@@ -12,17 +12,17 @@ class Colors(Enum):
     WARNING = '\033[91m'
     INFO = '\033[34m'
 
-    @staticmethod
-    def style(string: str, style: str) -> str:
-        """
-        Apply a given style to a string.
-        Args:
-            string (str): The text to style.
-            style (str): The name of the style (LOSS, WIN, DRAW, WARNING, INFO).
-        Returns:
-            str: The styled text.
-        """
-        try:
-            return f"{Colors[style.upper()].value}{string}{END}"
-        except:
-            return f"Style '{style}' is not defined. Available styles: {', '.join(Colors._member_names_)}"
+
+def style(string: str, theme: Colors) -> str:
+    """
+    Apply a given style to a string.
+    Args:
+        string (str): The text to style.
+        theme (Colors): The name of the style.
+    Returns:
+        str: The styled text.
+    """
+    try:
+        return f"{theme.value}{string}{END}"
+    except:
+        return f"Style '{style}' is not defined. Available styles: {', '.join(Colors._member_names_)}"

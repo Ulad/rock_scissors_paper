@@ -1,6 +1,6 @@
 from random import choice
 from enum import Enum
-from colors import Colors
+from colors import style, Colors
 
 HELPER = '''Choices:
     [r]ock
@@ -14,8 +14,6 @@ class Choices(Enum):
     s = 2, "SCISSORS"
     q = 99, "QUIT"
 
-style = Colors.style
-
 class Player:
     def __init__(self, name: str):
         self.score = 0
@@ -27,7 +25,7 @@ class Player:
             player_input = input(f"{self.name}, take your pick: ")[:1].lower()
             if player_input in self.available_choices:
                 return player_input
-            print(style("INVALID: please enter one of the available options:", "warning"))
+            print(style("INVALID: please enter one of the available options:", Colors.WARNING))
             print(HELPER)
 
 
@@ -50,11 +48,11 @@ class Game:
     def determine_winner(self, player_input: str, computer_input: str) -> (str, object):
         dif = Choices[player_input].value[0] - Choices[computer_input].value[0]
         if dif in (-1, 2):
-            return style(f"{self.player_name} wins", "win"), self.player
+            return style(f"{self.player_name} wins", Colors.WIN), self.player
         elif dif in (-2, 1):
-            return style("Computer wins.", "loss"), self.computer
+            return style("Computer wins.", Colors.LOSS), self.computer
         elif dif == 0:
-            return style("Draw.", "draw"), None
+            return style("Draw.", Colors.DRAW), None
 
     def update_scores(self, winner: object):
         if winner == self.player:
@@ -63,7 +61,7 @@ class Game:
             self.computer.score += 1
 
     def display_scores(self):
-        print(style(f"Scores: {self.player_name} {self.player.score} | Computer {self.computer.score}\n", "info"))
+        print(style(f"Scores: {self.player_name} {self.player.score} | Computer {self.computer.score}\n", Colors.INFO))
 
     def play(self):
         print(HELPER)
