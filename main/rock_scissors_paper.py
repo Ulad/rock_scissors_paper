@@ -48,7 +48,7 @@ class Game:
         self.player = Player(self.player_name)
         self.computer = Computer()
 
-    def determine_and_display_winner(self, player_input: str, computer_input: str) -> (str, object):
+    def determine_and_display_winner(self, player_input: str, computer_input: str) -> (str, Player | Computer):
         dif = Choices[player_input].value[0] - Choices[computer_input].value[0]
         if dif in (-1, 2):
             return style(f"{self.player_name} wins", Colors.WIN), self.player
@@ -57,7 +57,7 @@ class Game:
         elif dif == 0:
             return style("Draw.", Colors.DRAW), None
 
-    def update_scores(self, winner: object):
+    def update_scores(self, winner: Player | Computer):
         if winner == self.player:
             self.player.score += 1
         elif winner == self.computer:
