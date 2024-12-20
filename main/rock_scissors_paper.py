@@ -1,7 +1,7 @@
 from random import choice
 from enum import Enum
 
-from colors import style, Colors
+from main.colors import style, Colors
 
 HELPER = '''Choices:
     [r]ock
