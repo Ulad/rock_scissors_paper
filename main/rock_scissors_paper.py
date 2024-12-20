@@ -1,6 +1,6 @@
 from random import choice
 from enum import Enum
-from typing import Tuple
+
 from colors import style, Colors
 
 HELPER = '''Choices:
@@ -48,7 +48,7 @@ class Game:
         self.player = Player(self.player_name)
         self.computer = Computer()
 
-    def determine_and_display_winner(self, player_input: str, computer_input: str) -> Tuple[str, object]:
+    def determine_and_display_winner(self, player_input: str, computer_input: str) -> (str, object):
         dif = Choices[player_input].value[0] - Choices[computer_input].value[0]
         if dif in (-1, 2):
             return style(f"{self.player_name} wins", Colors.WIN), self.player
