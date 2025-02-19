@@ -24,12 +24,10 @@ class Player:
         self.available_choices = Choices._member_names_
 
     def choose(self) -> str:
-        while True:
-            player_input = input(f"{self.name}, take your pick: ")[:1].lower()
-            if player_input in self.available_choices:
-                return player_input
+        while (player_input:=input(f"{self.name}, take your pick: ").lower().strip()[:1]) not in self.available_choices:
             print(style("INVALID: please enter one of the available options:", Colors.WARNING))
             print(HELPER)
+        return player_input
 
 
 class Computer:
